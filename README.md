@@ -1,1 +1,2 @@
-# ConsoleAppOpenAI
+# OpenAI Console Application
+
