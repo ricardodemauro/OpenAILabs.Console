@@ -1,8 +1,4 @@
-﻿using Standard.AI.OpenAI.Clients.OpenAIs;
-using Standard.AI.OpenAI.Models.Configurations;
-using Standard.AI.OpenAI.Models.Services.Foundations.ChatCompletions;
-
-namespace ConsoleAppOpenAI;
+﻿namespace ConsoleAppOpenAI;
 
 public class OpenAIProxy : IOpenAIProxy
 {
@@ -10,7 +6,9 @@ public class OpenAIProxy : IOpenAIProxy
 
     readonly List<ChatCompletionMessage> _messages;
 
-    public OpenAIProxy(string apiKey, string organizationId)
+    public OpenAIProxy(
+        string apiKey,
+        string organizationId)
     {
         var openAIConfigurations = new OpenAIConfigurations
         {
@@ -20,12 +18,16 @@ public class OpenAIProxy : IOpenAIProxy
 
         openAIClient = new OpenAIClient(openAIConfigurations);
 
-        _messages = new List<ChatCompletionMessage>();
+        _messages = new();
     }
 
     public void SetSystemMessage(string systemMessage)
     {
-        var sysMsg = new ChatCompletionMessage() { Content = systemMessage, Role = "system" };
+        var sysMsg = new ChatCompletionMessage()
+        {
+            Content = systemMessage,
+            Role = "system"
+        };
         _messages.Insert(0, sysMsg);
     }
 

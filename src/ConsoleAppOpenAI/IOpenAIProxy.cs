@@ -5,4 +5,6 @@ namespace ConsoleAppOpenAI;
 public interface IOpenAIProxy
 {
     Task<ChatCompletionMessage[]> SendChatMessage(string message);
+
+    void SetSystemMessage(string systemMessage);
 }

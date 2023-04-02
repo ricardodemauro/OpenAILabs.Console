@@ -1,5 +1,4 @@
 ﻿using ConsoleAppOpenAI;
-using Humanizer;
 using Microsoft.Extensions.Configuration;
 using Spectre.Console;
 using System.Reflection;
@@ -11,8 +10,9 @@ AnsiConsole.Write(new FigletText("Console GPT").Color(Color.Blue));
 var config = BuildConfig();
 IOpenAIProxy chatOpenAI = new OpenAIProxy(
     config["OpenAI:ApiKey"],
-    config["OpenAI:OrganizationId"],
-    "You are a helpful assistant called Felix AI");
+    config["OpenAI:OrganizationId"]);
+
+chatOpenAI.SetSystemMessage("You are a helpful assistant called Felix AI");
 
 var msg = AnsiConsole.Ask<string>("[bold blue]Type your first Prompt[/]:");
 do
