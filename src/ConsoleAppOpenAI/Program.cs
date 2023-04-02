@@ -9,7 +9,7 @@ AnsiConsole.MarkupLine("Starting commandline for [underline bold green]Chat GPT[
 AnsiConsole.Write(new FigletText("Console GPT").Color(Color.Blue));
 
 var config = BuildConfig();
-var chatOpenAI = new OpenAIProxy(config, "You are a helpful assistant called Felix AI");
+IOpenAIProxy chatOpenAI = new OpenAIProxy(config, "You are a helpful assistant called Felix AI");
 
 var msg = AnsiConsole.Ask<string>("[bold blue]Type your first Prompt[/]:");
 do
