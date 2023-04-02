@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Standard.AI.OpenAI.Clients.OpenAIs;
+﻿using Standard.AI.OpenAI.Clients.OpenAIs;
 using Standard.AI.OpenAI.Models.Configurations;
 using Standard.AI.OpenAI.Models.Services.Foundations.ChatCompletions;
 
@@ -11,20 +10,23 @@ public class OpenAIProxy : IOpenAIProxy
 
     readonly List<ChatCompletionMessage> _messages;
 
-    public OpenAIProxy(IConfiguration configuration, string systemConfig)
+    public OpenAIProxy(string apiKey, string organizationId)
     {
         var openAIConfigurations = new OpenAIConfigurations
         {
-            ApiKey = configuration["OpenAI:ApiKey"],
-            OrganizationId = configuration["OpenAI:OrganizationId"]
+            ApiKey = apiKey,
+            OrganizationId = organizationId
         };
 
         openAIClient = new OpenAIClient(openAIConfigurations);
 
         _messages = new List<ChatCompletionMessage>();
+    }
 
-        var systemMessage = new ChatCompletionMessage() { Content = systemConfig, Role = "system" };
-        _messages.Add(systemMessage);
+    public void SetSystemMessage(string systemMessage)
+    {
+        var sysMsg = new ChatCompletionMessage() { Content = systemMessage, Role = "system" };
+        _messages.Insert(0, sysMsg);
     }
 
     void StackMessages(params ChatCompletionMessage[] message)
@@ -32,7 +34,7 @@ public class OpenAIProxy : IOpenAIProxy
         _messages.AddRange(message);
     }
 
-    ChatCompletionMessage[] ToCompletitionMessage(ChatCompletionChoice[] choices)
+    static ChatCompletionMessage[] ToCompletionMessage(ChatCompletionChoice[] choices)
         => choices.Select(x => x.Message).ToArray();
 
     public Task<ChatCompletionMessage[]> SendChatMessage(string message)
@@ -60,7 +62,7 @@ public class OpenAIProxy : IOpenAIProxy
 
         var choices = resultChatCompletion.Response.Choices;
 
-        var messages = ToCompletitionMessage(choices);
+        var messages = ToCompletionMessage(choices);
 
         StackMessages(messages);
 
