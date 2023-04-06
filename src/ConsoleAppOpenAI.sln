@@ -9,7 +9,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		..\README.md = ..\README.md
+		Labs\requests.http = Labs\requests.http
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppOpenAI.DALL_E", "ConsoleAppOpenAI.DALL_E\ConsoleAppOpenAI.DALL_E.csproj", "{3A05C6CF-DF9F-4CBB-96DD-9661043E6DAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +24,10 @@ Global
 		{E0AD9632-2879-41EA-8710-1BAAD6DB7EAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0AD9632-2879-41EA-8710-1BAAD6DB7EAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0AD9632-2879-41EA-8710-1BAAD6DB7EAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A05C6CF-DF9F-4CBB-96DD-9661043E6DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A05C6CF-DF9F-4CBB-96DD-9661043E6DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A05C6CF-DF9F-4CBB-96DD-9661043E6DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A05C6CF-DF9F-4CBB-96DD-9661043E6DAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

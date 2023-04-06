@@ -1,0 +1,18 @@
+
+GET https://api.openai.com/v1/models
+content-type: application/json
+Authorization: Bearer AAA
+OpenAI-Organization: XXX
+
+###
+
+POST https://api.openai.com/v1/images/generations
+content-type: application/json
+Authorization: Bearer AAA
+OpenAI-Organization: XXX
+
+{
+    "prompt": "A cute baby sea otter",
+    "n": 1,
+    "size": "1024x1024"
+}
