@@ -1,25 +1,22 @@
-﻿using ConsoleAppOpenAI.DALL_E.Models.Images;
+﻿using ConsoleAppOpenAI.DALL_E.HttpServices;
 using ConsoleAppOpenAI.DALL_E.Services;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
 
-Console.WriteLine("Starting commandline for [underline bold green]DALL-E Open AI[/] World!");
+Console.WriteLine("Starting commandline for DALL-E [Open AI]");
 
 var config = BuildConfig();
 
-var aiClient = new OpenAIService(config);
+IOpenAIProxy aiClient = new OpenAIHttpService(config);
 
 Console.WriteLine("Type your first Prompt");
 var msg = Console.ReadLine();
 
 do
 {
-    var prompt = new GenerateImageRequest
-    {
-        N = 1,
-        Prompt = msg,
-        Size = "1024x1024"
-    };
+    var nImages = int.Parse(config["OpenAi:DALL-E:N"]);
+    var imageSize = config["OpenAi:DALL-E:Size"];
+    var prompt = new GenerateImageRequest(msg, nImages, imageSize);
 
     var result = await aiClient.GenerateImages(prompt);
 
@@ -47,4 +44,3 @@ static IConfiguration BuildConfig()
 
     return configBuilder.Build();
 }
-
